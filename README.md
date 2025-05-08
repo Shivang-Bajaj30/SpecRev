@@ -1,4 +1,4 @@
-# ==============================SpecRev===========================
+# =================SpecRev=================
 
 SpecRev is a web application that allows users to compare motorcycle specifications and features side by side. Built with Flask, this application provides an intuitive interface for motorcycle enthusiasts to make informed decisions when researching different bike models.
 
