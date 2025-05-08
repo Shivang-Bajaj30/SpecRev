@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SpecRev</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>SpecRev</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-links">
+                    <a href="index">Home</a>
+                    <a href="index#compare">Compare</a>
+                    <a href="index#popular">Popular</a>
+                    <a href="about">About</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="{{url_for('login')}}" class="auth-btn">Login</a>
+                    <a href="{{url_for('signup')}}" class="auth-btn">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="login auth-page">
+        <div class="auth-container">
+            <div class="signup-content auth-card" style="padding-right: 0px;">
+                <div class="signup-form">
+                    <div class="auth-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h2>Welcome Back</h2>
+                        <p>Log in to continue your journey</p>
+                    </div>
+                    
+                    <form method="POST" action="{{ url_for('login')}}" class="auth-form" id="loginForm">
+                        <div class="input-group">
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <input name="email" type="email" placeholder="Email Address" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <input name="pswd" type="password" placeholder="Password" required>
+                        </div>
+                        
+                        <div class="auth-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="auth-button primary">
+                            Login
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+                        
+                        <button class="auth-button social google">
+                            <i class="fab fa-google"></i>
+                            Continue with Google
+                        </button>
+                        
+                        <p class="auth-redirect">
+                            Don't have an account? <a href="{{url_for('signup')}}">Sign up</a>
+                        </p>
+                    </form>
+                </div>
+                <div class="signup-image login-image">
+                    <figure><img src="../static/img/honda.jpeg" alt="Royal Enfield motorcycle"></figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Remove the incorrect script reference -->
+    <!-- <script src="js/auth.js"></script> -->
+</body>
+</html> 

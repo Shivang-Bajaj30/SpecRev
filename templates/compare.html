@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpecRev - Comparison Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/compare.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="{{ url_for('index') }}">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>SpecRev</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-links">
+                    <a href="index">Home</a>
+                    <a href="index#compare">Compare</a>
+                    <a href="index#popular">Popular</a>
+                    {% if session.get('user_email') %}
+                    <a href="">Saved Comparisons</a>
+                    {% endif %}
+                    <a href="about">About</a>
+                </div>
+                <div class="auth-buttons">
+                    {% if session.get('user_email') %}
+                    <!-- User profile dropdown -->
+                     Welcome, {{ session['user_name'] }}
+                    <div class="user-profile">
+                        <button class="user-btn" id="user-btn">
+                            <img src="../static/img/user.png" alt="User Profile" class="user-icon">
+                        </button>
+                        <div class="dropdown-menu" id="dropdown-menu">
+                            <a href="#" class="dropdown-item">User Profile</a>
+                            <a href="" class="dropdown-item">Saved Comparisons</a>
+                            <a href="{{ url_for('logout') }}" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="auth-btn">Login</a>
+                    <a href="{{ url_for('signup') }}" class="auth-btn">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Comparison Details Section -->
+    <section class="comparison-details">
+        <div class="container">
+            <div class="section-header comparison-title-section">
+                <h2>Detailed Comparison</h2>
+                <div class="comparison-title-divider"></div>
+                <p id="comparison-title">Comparing selected bikes with detailed specifications</p>
+            </div>
+
+            <div class="comparison-result">
+                <!-- Bike Headers -->
+                <div class="bike-headers">
+                    <div class="bike-header" id="bike1-header">
+                        <div class="bike-image">
+                            <img id="bike1-img" src="/static/img/bikes/placeholder-bike.webp" alt="Bike 1">
+                        </div>
+                        <div class="bike-info">
+                            <h3 id="bike1-name">Loading...</h3>
+                            <p id="bike1-model">Loading...</p>
+                            <div class="variant-badge" id="bike1-variant-badge">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="vs-container">
+                        <div class="vs-badge">VS</div>
+                    </div>
+                    
+                    <div class="bike-header" id="bike2-header">
+                        <div class="bike-image">
+                            <img id="bike2-img" src="/static/img/bikes/placeholder-bike.webp" alt="Bike 2">
+                        </div>
+                        <div class="bike-info">
+                            <h3 id="bike2-name">Loading...</h3>
+                            <p id="bike2-model">Loading...</p>
+                            <div class="variant-badge" id="bike2-variant-badge">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Tabs -->
+                <div class="comparison-tabs">
+                    <div class="tab-header">
+                        <div class="tab-button active" data-tab="specs">Specifications</div>
+                        <div class="tab-button" data-tab="features">Features</div>
+                        <div class="tab-button" data-tab="pricing">Pricing</div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- Specifications Tab -->
+                        <div class="tab-pane active" id="specs-tab">
+                            <div class="comparison-table">
+                                <div class="table-row header">
+                                    <div class="table-cell">Specification</div>
+                                    <div class="table-cell" id="spec-bike1-name">Bike 1</div>
+                                    <div class="table-cell" id="spec-bike2-name">Bike 2</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Displacement</div>
+                                    <div class="table-cell" id="cc1">-</div>
+                                    <div class="table-cell" id="cc2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Power</div>
+                                    <div class="table-cell" id="power1">-</div>
+                                    <div class="table-cell" id="power2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Torque</div>
+                                    <div class="table-cell" id="torque1">-</div>
+                                    <div class="table-cell" id="torque2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Cylinders</div>
+                                    <div class="table-cell" id="cylinders1">-</div>
+                                    <div class="table-cell" id="cylinders2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Cooling System</div>
+                                    <div class="table-cell" id="coolingsystem1">-</div>
+                                    <div class="table-cell" id="coolingsystem2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Mileage</div>
+                                    <div class="table-cell" id="mileage1">-</div>
+                                    <div class="table-cell" id="mileage2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Braking System</div>
+                                    <div class="table-cell" id="brakingsystem1">-</div>
+                                    <div class="table-cell" id="brakingsystem2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Front Brake</div>
+                                    <div class="table-cell" id="frontBrake1">-</div>
+                                    <div class="table-cell" id="frontBrake2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Rear Brake</div>
+                                    <div class="table-cell" id="rearBrake1">-</div>
+                                    <div class="table-cell" id="rearBrake2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Front Suspension</div>
+                                    <div class="table-cell" id="frontSusp1">-</div>
+                                    <div class="table-cell" id="frontSusp2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Rear Suspension</div>
+                                    <div class="table-cell" id="rearSusp1">-</div>
+                                    <div class="table-cell" id="rearSusp2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Wheel Type</div>
+                                    <div class="table-cell" id="wheeltype1">-</div>
+                                    <div class="table-cell" id="wheeltype2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Front Tyre Size</div>
+                                    <div class="table-cell" id="fronttyresize1">-</div>
+                                    <div class="table-cell" id="fronttyresize2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Rear Tyre Size</div>
+                                    <div class="table-cell" id="reartyresize1">-</div>
+                                    <div class="table-cell" id="reartyresize2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Tyre Type</div>
+                                    <div class="table-cell" id="tyretype1">-</div>
+                                    <div class="table-cell" id="tyretype2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Gear Shifting Pattern</div>
+                                    <div class="table-cell" id="gearshiftingpattern1">-</div>
+                                    <div class="table-cell" id="gearshiftingpattern2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Clutch</div>
+                                    <div class="table-cell" id="clutch1">-</div>
+                                    <div class="table-cell" id="clutch2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Kerb Weight</div>
+                                    <div class="table-cell" id="kerbweight1">-</div>
+                                    <div class="table-cell" id="kerbweight2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Length</div>
+                                    <div class="table-cell" id="lengthmm1">-</div>
+                                    <div class="table-cell" id="lengthmm2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Width</div>
+                                    <div class="table-cell" id="widthmm1">-</div>
+                                    <div class="table-cell" id="widthmm2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Year</div>
+                                    <div class="table-cell" id="year1">-</div>
+                                    <div class="table-cell" id="year2">-</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">Brand</div>
+                                    <div class="table-cell" id="brand1">-</div>
+                                    <div class="table-cell" id="brand2">-</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Features Tab -->
+                        <div class="tab-pane" id="features-tab">
+                            <div class="features-comparison">
+                                <div class="feature-list" id="features1">
+                                    <h4 id="features1-title">Bike 1 Features</h4>
+                                    <ul id="features1-list">
+                                        <li class="loading">Loading features...</li>
+                                    </ul>
+                                </div>
+                                <div class="feature-list" id="features2">
+                                    <h4 id="features2-title">Bike 2 Features</h4>
+                                    <ul id="features2-list">
+                                        <li class="loading">Loading features...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pricing Tab -->
+                        <div class="tab-pane" id="pricing-tab">
+                            <div class="pricing-comparison">
+                                <div class="pricing-card" id="pricing1">
+                                    <h4 id="pricing1-title">Bike 1 Pricing</h4>
+                                    <div class="price-badge" id="price1-badge">₹ -</div>
+                                    <div class="price-details">
+                                        <div class="price-row">
+                                            <span>Ex-showroom</span>
+                                            <span id="ex-showroom1">₹ -</span>
+                                        </div>
+                                        <div class="price-row">
+                                            <span>Road Tax (Est.)</span>
+                                            <span id="tax1">₹ -</span>
+                                        </div>
+                                        <div class="price-row">
+                                            <span>Insurance (Est.)</span>
+                                            <span id="insurance1">₹ -</span>
+                                        </div>
+                                        <div class="price-row total">
+                                            <span>On-Road Price</span>
+                                            <span id="onroad1">₹ -</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pricing-card" id="pricing2">
+                                    <h4 id="pricing2-title">Bike 2 Pricing</h4>
+                                    <div class="price-badge" id="price2-badge">₹ -</div>
+                                    <div class="price-details">
+                                        <div class="price-row">
+                                            <span>Ex-showroom</span>
+                                            <span id="ex-showroom2">₹ -</span>
+                                        </div>
+                                        <div class="price-row">
+                                            <span>Road Tax (Est.)</span>
+                                            <span id="tax2">₹ -</span>
+                                        </div>
+                                        <div class="price-row">
+                                            <span>Insurance (Est.)</span>
+                                            <span id="insurance2">₹ -</span>
+                                        </div>
+                                        <div class="price-row total">
+                                            <span>On-Road Price</span>
+                                            <span id="onroad2">₹ -</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-actions">
+                    <a href="index#compare" class="btn-secondary">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>New Comparison</span>
+                    </a>
+                    <button class="btn-primary" id="share-btn">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Save Comparison</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>BikeCompare</span>
+                    </div>
+                    <p>The ultimate platform for comparing two-wheelers to make informed buying decisions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index">Home</a></li>
+                        <li><a href="index#compare">Compare Bikes</a></li>
+                        <li><a href="index#popular">Popular Comparisons</a></li>
+                        <li><a href="index#features">Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Bike Reviews</a></li>
+                        <li><a href="#">Latest Launches</a></li>
+                        <li><a href="#">Upcoming Bikes</a></li>
+                        <li><a href="#">Electric Bikes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> contact@bikecompare.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/compare-details.js"></script>
+    <script src="/static/js/dropdown.js"></script>
+</body>
+</html> 

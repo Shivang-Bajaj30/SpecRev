@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SpecRev</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="{{ url_for('index') }}">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>SpecRev</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-links">
+                    <a href="index">Home</a>
+                    <a href="index#compare">Compare</a>
+                    <a href="index#popular">Popular</a>
+                    {% if session.get('user_email') %}
+                    <a href="">Saved Comparisons</a>
+                    {% endif %}
+                    <a href="about">About</a>
+                </div>
+                <div class="auth-buttons">
+                    {% if session.get('user_email') %}
+                    <!-- User profile dropdown -->
+                     Welcome, {{ session['user_name'] }}
+                    <div class="user-profile">
+                        <button class="user-btn" id="user-btn">
+                            <img src="../static/img/user.png" alt="User Profile" class="user-icon">
+                        </button>
+                        <div class="dropdown-menu" id="dropdown-menu">
+                            <a href="#" class="dropdown-item">User Profile</a>
+                            <a href="" class="dropdown-item">Saved Comparisons</a>
+                            <a href="{{ url_for('logout') }}" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="auth-btn">Login</a>
+                    <a href="{{ url_for('signup') }}" class="auth-btn">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-hero">
+        <div class="about-hero-content">
+            <h1>About <span class="highlight">SpecRev</span></h1>
+            <p>Your trusted companion in making informed two-wheeler decisions</p>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>SpecRev was born from a simple idea: making two-wheeler comparisons easy and accessible for everyone. We understand that choosing the right bike is a significant decision, and we're here to help you make that choice with confidence.</p>
+                    <p>Our platform brings together comprehensive specifications, real user reviews, and detailed comparisons to give you a complete picture of your options.</p>
+                </div>
+                <div class="about-image">
+                    <img src="../static/img/about-story.jpg" alt="Our Story">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <p>To empower two-wheeler enthusiasts with accurate, comprehensive, and easy-to-understand comparisons, helping them make informed decisions about their next ride.</p>
+                <div class="mission-values">
+                    <div class="value-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Accuracy</h3>
+                        <p>We ensure all our specifications and comparisons are accurate and up-to-date.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                        <p>Building a community of informed riders who help each other make better choices.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Trust</h3>
+                        <p>Maintaining transparency and building trust through honest comparisons.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+    <section class="team-section">  
+        <div class="container">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../static/img/team-1.jpg" alt="Team Member">
+                    </div>
+                    <h3>Shivang Bajaj</h3>
+                    <p>Founder & Developer</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>   -->
+
+    <section class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>shivang.bajaj30@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>+91 9810739441</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>New Delhi, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>SpecRev</span>
+                    </div>
+                    <p>The ultimate platform for comparing two-wheelers to make informed buying decisions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index">Home</a></li>
+                        <li><a href="index#compare">Compare Bikes</a></li>
+                        <li><a href="index#popular">Popular Comparisons</a></li>
+                        <li><a href="about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Bike Reviews</a></li>
+                        <li><a href="#">Latest Launches</a></li>
+                        <li><a href="#">Upcoming Bikes</a></li>
+                        <li><a href="#">Electric Bikes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> shivang.bajaj30@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9810739441</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/dropdown.js"></script>
+</body>
+</html> 
